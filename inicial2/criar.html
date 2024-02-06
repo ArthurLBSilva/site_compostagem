@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pr-br">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="criarstyle.css">
+      <title>EcoCompost</title>
+   </head>
+   <body>
+      <div class="borda">
+         <h1>
+            <span class="cor2">Eco<span class="cor1">Compost</span></span>
+         </h1>
+         <br>
+         <h1 class="cor3">
+            Adicionar
+         </h1>
+         <br>
+         <div id="div-selecao">
+         <div>
+            <p id="numeracao-da-compostagem">Numeração</p>
+            <input type="number" id="numeracao-da-compostagem2" placeholder="Digite">
+         </div>
+          <br>
+         <div id="div-data">
+   <button id="btn-data" onclick="setDataAtual()">Data Atual</button>
+   <input id="input-data" type="date" value="">
+</div>
+         <br>
+         <br>
+         <div class="opcoes">
+            Fase Desejada
+            <select class="opcoes" id="opcoesMaturacao">
+               <option value="maturação">Maturação</option>
+               <option value="mesófila">Mesófila</option>
+               <option value="cura">Cura</option>
+            </select>
+         </div>
+      </div>
+
+      <a href="../inicial/tela.html">
+         <button id="but-confirmar">
+            Confimar
+         </button>
+      </a>
+
+   </div>
+
+   </body>
+   <script>
+      function setDataAtual() {
+        var dataInput = document.getElementById('input-data');
+        
+        // Obter a data atual no formato YYYY-MM-DD
+        var dataAtual = new Date().toISOString().split('T')[0];
+        
+        // Definir a data no campo de entrada
+        dataInput.value = dataAtual;
+      } 
+   </script>
+</html>

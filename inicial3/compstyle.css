@@ -1,0 +1,90 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 100% da altura da viewport */
+    background-color: #272727;
+    margin: 0;
+}
+
+.borda {
+    position: relative; /* Alteração: Adiciona posicionamento relativo */
+    width: 700px;
+    height: 700px;
+    background-color: #1B1B1B;
+    border: 2px solid #FFA500;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+h1{
+    font-family: 'Poppins';
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#numeracao{
+    display: flex;
+    align-items: center;
+    margin: 20px 50px 10px 50px;
+    background-color: #0b0b0b;
+    padding: 10px 20px;
+    border: 2px solid #998c73;
+    border-radius: 7px;
+    font-size: 1.5em;
+}
+
+#numeracao .cor1 {
+    margin-right: 5px; /* Adiciona espaçamento à direita */
+}
+
+#numeracao .cor2 {
+    margin-left: 5px; /* Adiciona espaçamento à esquerda */
+}
+
+#compostagem {
+    border-radius: 20px;
+    width: 450px;
+    height: 300px;
+    z-index: 1; /* Alteração: Define a ordem de empilhamento */
+}
+
+.quadrado {
+    position: relative; /* Alteração: Adiciona posicionamento relativo */
+    z-index: 2; /* Alteração: Define a ordem de empilhamento */
+    width: 350px;
+    height: 340px;
+    text-align: center;
+    border: 2px solid #080808;
+    padding: 5px 50px 50px;
+    border-radius: 30px;
+    color: white;
+    background-color: #272727;
+    margin-top: -90px;
+}
+
+#meta{
+    width: 330px;
+    height: 290px;
+}
+
+@media screen and (max-width: 768px){
+    
+    .borda{
+        width: 375px !important;
+        height: 640px !important;
+    }
+    h1{
+        font-size: 1.3em;
+    }
+}

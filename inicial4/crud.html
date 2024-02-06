@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleCrud.css">
+    <style>
+        .cor1 {
+            color: #252a34;
+        }
+
+        .cor2 {
+            color: #FFA500;
+        }
+    </style>
+    <title>EcoCompost</title>
+</head>
+
+
+<body>
+    <div class="borda">
+        <h2>
+            <span class="cor1">Cadastros</span>
+            <span class="cor2">Salvos:</span>
+        </h2>
+
+        <form id="Crud" method="POST">
+            <button type="button" class="btn" onclick="showData('email')">Mostrar Emails</button>
+            <button type="button" class="btn" onclick="showData('username')">Mostrar Usuários</button>
+            <button type="button" class="btn" onclick="showData('senha')">Mostrar Senhas</button>
+        </form>
+
+        <div id="emailList"></div>
+        <div id="usernameList"></div>
+        <div id="senhaList"></div>
+        <a href="../index.html" class="customButton">Tela de login</a>
+    </div>
+
+    <script>
+
+var isEmailVisible = false;
+var isUsernameVisible = false;
+var isSenhaVisible = false;
+
+function showData(dataType) {
+    var dataListDiv = document.getElementById(dataType + "List");
+
+    // Se os dados estiverem visíveis, oculta-os e retorna
+    if (dataType === 'email' && isEmailVisible) {
+        dataListDiv.innerHTML = "";
+        isEmailVisible = false;
+        return;
+    } else if (dataType === 'username' && isUsernameVisible) {
+        dataListDiv.innerHTML = "";
+        isUsernameVisible = false;
+        return;
+    } else if (dataType === 'senha' && isSenhaVisible) {
+        dataListDiv.innerHTML = "";
+        isSenhaVisible = false;
+        return;
+    }
+
+    var userListJSON = localStorage.getItem("userList");
+
+    if (!userListJSON) {
+        alert("Nenhum usuário cadastrado. Por favor, crie uma conta.");
+        return;
+    }
+
+    var userList = JSON.parse(userListJSON);
+
+    // Seleciona o array de dados com base no tipo de dado solicitado
+    var data = userList.map(function (user) {
+        return user[dataType];
+    });
+
+    // Atualizando o conteúdo da div com base no tipo de dado
+    dataListDiv.innerHTML = "";
+
+    // Adicionando botões e dados para cada item
+    for (var i = 0; i < data.length; i++) {
+        var itemDiv = document.createElement("div");
+
+        // Adiciona o dado (email, username, senha)
+        itemDiv.innerHTML = "<span>" + data[i] + "</span>";
+
+        // Adiciona os botões de edição e exclusão
+        var editButton = createButton("editBtn", "Editar", i, dataType);
+        var deleteButton = createButton("deleteBtn", "Excluir", i, dataType);
+
+        itemDiv.appendChild(editButton);
+        itemDiv.appendChild(deleteButton);
+
+        dataListDiv.appendChild(itemDiv);
+    }
+
+    // Define a visibilidade como verdadeira após mostrar os dados
+    if (dataType === 'email') {
+        isEmailVisible = true;
+    } else if (dataType === 'username') {
+        isUsernameVisible = true;
+    } else if (dataType === 'senha') {
+        isSenhaVisible = true;
+    }
+}
+
+        function createButton(className, buttonText, index, dataType) {
+            var button = document.createElement("button");
+            button.classList.add(className);
+            button.innerText = buttonText;
+
+            // Adiciona um evento ao botão
+            if (className === "editBtn") {
+                button.addEventListener("click", function () {
+                    var newDataPrompt = getNewDataPrompt(dataType);
+                    var newValue = prompt(newDataPrompt);
+                    if (newValue !== null) {
+                        updateData(index, dataType, newValue);
+                        showData(dataType); // Atualiza a exibição após a edição
+                    }
+                });
+            } else if (className === "deleteBtn") {
+                button.addEventListener("click", function () {
+                    var confirmation = confirm("Deseja excluir essa conta?");
+                    if (confirmation) {
+                        deleteData(index, dataType);
+                        showData(dataType); // Atualiza a exibição após a exclusão
+                    }
+                });
+            }
+
+            return button;
+        }
+
+        function getNewDataPrompt(dataType) {
+            switch (dataType) {
+                case 'email':
+                    return "Digite o novo email:";
+                case 'username':
+                    return "Digite o novo usuário:";
+                case 'senha':
+                    return "Digite a nova senha:";
+                default:
+                    return "Digite o novo valor:";
+            }
+        }
+
+        function updateData(index, dataType, newValue) {
+            var userListJSON = localStorage.getItem("userList");
+            var userList = JSON.parse(userListJSON);
+
+            userList[index][dataType] = newValue;
+
+            localStorage.setItem("userList", JSON.stringify(userList));
+        }
+
+        function deleteData(index, dataType) {
+            var userListJSON = localStorage.getItem("userList");
+            var userList = JSON.parse(userListJSON);
+
+            userList.splice(index, 1);
+
+            localStorage.setItem("userList", JSON.stringify(userList));
+        }
+    </script>
+</body>
+
+</html>

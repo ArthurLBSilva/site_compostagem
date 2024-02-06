@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>EcoCompost</title>
+</head>
+<body>
+    <section class="area-login">
+        <div class="login">
+            <div>
+                <img src="assets/compostagem-imagem.png" alt="compostagem-imagem">
+            </div>
+
+            <form id="loginForm" method="POST">
+                <input type="text" name="nome" id="nome" placeholder="Nome de usuario" autofocus>
+                <input type="password" name="senha" id="senha" placeholder="Senha">
+                <br>
+                <button type="button" id="btn-prov" onclick="validateForm()">Entrar</button>
+            </form>
+            <p>Ainda não tem uma conta?<a href="cadastro/cadastro.html">Criar conta</a></p>
+        </div>
+
+    <script>
+        function validateForm() {
+            var nome = document.getElementById("nome").value;
+            var senha = document.getElementById("senha").value;
+
+            // Verificar se os campos estão preenchidos
+            if (nome === "" || senha === "") {
+                alert("Por favor, preencha todos os campos!");
+                return;
+            }
+
+            // Obter a lista de usuários do localStorage
+            var userListJSON = localStorage.getItem("userList");
+
+            if (!userListJSON) {
+                alert("Nenhum usuário cadastrado. Por favor, crie uma conta.");
+                return;
+            }
+
+            // Converter a lista de usuários para um array
+            var userList = JSON.parse(userListJSON);
+
+            // Verificar se há um usuário correspondente
+            var userFound = userList.find(function(user) {
+                return user.username === nome && user.senha === senha;
+            });
+
+            if (!userFound) {
+                alert("Usuário e/ou senha incorretos");
+                return;
+            }
+
+            window.location.href = "inicial/tela.html"; 
+        }
+    </script>
+</body>
+</html>

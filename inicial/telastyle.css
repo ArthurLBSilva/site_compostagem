@@ -1,0 +1,58 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 100% da altura da viewport */
+    background-color: #272727;
+    margin: 0;
+}
+
+.borda {
+    width: 700px; /* Largura do quadrado */
+    height: 700px; /* Altura do quadrado */
+    background-color: #1B1B1B; /* Cor de fundo do quadrado */
+    border: 2px solid #FFA500;
+    border-radius: 30px; /* Borda arredondada */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+h1{
+    font-family: 'Poppins';
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#btn-adc, #btn-adc-img{
+    width: 100px;
+    height: 80px;
+}
+
+.imagem {
+    transition: transform 0.3s ease;
+}
+
+.imagem:hover {
+    transform: scale(1.2); /* Aumenta o tamanho em 20% quando o cursor está sobre a imagem */
+}
+
+
+@media screen and (max-width: 768px){
+    
+    .borda{
+        width: 375px !important;
+        height: 640px !important;
+    }
+    h1{
+        font-size: 1.3em;
+    }
+    #btn-adc, #btn-adc-img{
+        width: 66.6px !important;
+        height: 53.3px !important;
+    }
+}

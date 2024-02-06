@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastrostyle.css">
+    <title>EcoCompost</title>
+</head>
+<body>
+    <section class="area-login">
+        <div class="login">
+            <div>
+                <img src="../assets/compostagem-imagem.png" alt="compostagem-imagem">
+            </div>
+
+            <form id="registrationForm">
+                <input type="text" name="email" placeholder="Email" autofocus>
+                <input type="text" name="username" placeholder="Nome de usuário">
+                <input type="password" name="senha" placeholder="Senha">
+                <br>
+                <button type="button" id="btn-prov">Cadastrar</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("btn-prov").addEventListener("click", function() {
+            // Obter os valores dos campos de entrada
+            var email = document.getElementsByName("email")[0].value;
+            var username = document.getElementsByName("username")[0].value;
+            var senha = document.getElementsByName("senha")[0].value;
+
+            // Validar se os campos não estão vazios
+            if (email && username && senha) {
+                // Obter a lista existente do localStorage ou criar uma nova lista vazia
+                var userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+                // Criar um objeto com os dados do usuário
+                var userData = {
+                    email: email,
+                    username: username,
+                    senha: senha
+                };
+
+                // Adicionar o objeto à lista
+                userList.push(userData);
+
+                // Converter a lista para uma string JSON
+                var userListJSON = JSON.stringify(userList);
+
+                // Armazenar a lista atualizada no localStorage
+                localStorage.setItem("userList", userListJSON);
+
+                // Redirecionar ou executar outras ações, se necessário
+                window.location.href = "../inicial4/crud.html";
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        });
+    </script>
+</body>
+</html>
